@@ -1,0 +1,58 @@
+<% include header.html %>
+<% include nav.html %>
+<section class="content-wrap">
+	<div class="container custom-container">
+		<div class="row">
+			<% var img = star.cover %>
+			<% var name = star.name %>
+			<% var img = "./../images/test.png" %>
+
+			<div class="col-sm-3"></div>
+			<div class="col-sm-3">
+				<div class="star-cover">
+					<img src="<%=img%>" alt="star.cover"/>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div>name: <%=name%></div>
+				<div>enname: <%=star.enname%></div>
+				<div>birth: <%=star.birth%></div>
+				<div>height: <%=star.height%></div>
+				<div>measurements: <%=star.measurements%></div>
+				<div>cupsize: <%=star.cupsize%></div>
+				<div>tag: <%=star.tags[0]%></div>
+				<div>minorid: <%=star.minorid%></div>
+			</div>
+			<div class="col-sm-3"></div>
+		</div>
+	</div>
+	<div class="container-fluid custom-fulid">
+		<div class="row">
+			<% var arts = star.arts %>
+			<% if(arts){ %>
+				<% var artscount = arts.length %>
+				<% arts.forEach(function(art, index, arts){%>
+					<% var img = art.img %>
+					<% var name = art.name %>
+					<% var img = "./../images/test.png" %>
+					<% var name = "拉萨拉萨" %>
+					<%if ((index)%4 == 0){%>
+						<div class="row">
+					<%}%>
+					<div class="col-sm-3">
+						<div class="art-cover">
+							<a href="#">
+								<img src="<%=img%>" alt="art.cover"/>
+							</a>
+							<div class="art-name"><%=name%></div>
+						</div>
+					</div>
+					<%if ((index)%4 == 3 || index == artscount - 1){%>
+						</div>
+					<%}%>
+			<% })}%>
+		</div>
+		<div class="xCount">--total:<%=artscount%>--</div>
+	</div>
+</section>
+<% include footer.html %>

@@ -1,0 +1,36 @@
+{
+    "tags":[
+		{"name":"大", "prefix":"big"},
+		{"name":"中", "prefix":"mid"},
+		{"name":"小", "prefix":"mini"}
+	],
+	"minors":[
+      {"minorid":1, "color":"#800080"},
+      {"minorid":2, "color":"#FF00FF"},
+      {"minorid":3, "color":"#FF0000"},
+      {"minorid":4, "color":"#D2691E"},
+      {"minorid":5, "color":"#0000FF"},
+      {"minorid":6, "color":"#00CED1"},
+      {"minorid":7, "color":"#008000"},
+      {"minorid":8, "color":"#000000"}
+	],
+	"search_list": [
+		{
+			"name":"a-up",
+			"list_url": "http://www.a-up.info/avlady/actor/all{}-d/",
+			"actress_prof":{"tag":"dl", "type":"search_all"},
+			"name_prof":{"tag":"dt", "type":"search_all"},
+			"pages_prof":{"key":"poff", "tag":"span", "type":"search_class"},
+			"flip_way":"flip_count",
+			"count_base":21
+		},
+		{
+			"name":"r18",
+			"list_url": "http://www.r18.com/videos/vod/movies/actress/letter=a/sort=new/page={}/?lg=zh",
+			"actress_prof":{"tag":"li", "type":"search_all"},
+			"name_prof":{"key":"txt01", "tag":"div", "type":"search_class"},
+			"flip_way":"flip_page",
+			"max_page":319
+		}
+    ]
+}
