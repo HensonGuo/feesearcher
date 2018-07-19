@@ -127,36 +127,40 @@ function deepFindInFavorite(name){
 		{
 			return star
 		}
-		return null
 	}
+	return null
 }
 
 
 function find(name){
-	star = deepFindInFavorite(name);
+	var star = deepFindInFavorite(name);
 	if (star){
 		return {"src":constants.SrcConst.Favorites, "data":star}
 	}
-	for (var sname in _tbds)
+	for (var index in _tbds)
 	{
+		var sname = _tbds[index];
 		if (sname == name){
 			return {"src":constants.SrcConst.Tbds, "data":name};
 		}
 	}
-	for (var sname in _ignores)
+	for (var index in _ignores)
 	{
+		var sname = _ignores[index];
 		if (sname == name){
 			return {"src":constants.SrcConst.Ignores, "data":name};
 		}
 	}
-	for (var sname in _vieweds)
+	for (var index in _vieweds)
 	{
+		var sname = _vieweds[index];
 		if (sname == name){
 			return {"src":constants.SrcConst.Vieweds, "data":name};
 		}
 	}
-	for (var sname in _results)
+	for (var index in _results)
 	{
+		var sname = _results[index];
 		if (sname == name){
 			return {"src":constants.SrcConst.Results, "data":name};
 		}

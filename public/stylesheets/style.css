@@ -129,6 +129,7 @@
     margin-bottom: 20px;
     line-height: inherit;
     box-sizing: border-box;
+    cursor: pointer;
 }
 .art-cover img{
     overflow: hidden;
@@ -140,9 +141,9 @@
 }
 
 
-
-
-
+#videoPlayer{
+    width: 100%;
+}
 
 
 

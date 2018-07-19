@@ -13,6 +13,7 @@ var SrcConst = {
 }
 
 
-exports.serveradress = "http://localhost:3000"
+exports.serveradress = "http://localhost:3000";
+exports.filesvradress = "http://localhost:3000";
 exports.Tag = TagConst;
 exports.SrcConst = SrcConst;

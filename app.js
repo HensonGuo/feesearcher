@@ -25,14 +25,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'video_player')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/test', indexRouter.test);
-app.use('/follows', followsRouter);
+app.use('/follows', followsRouter.handle);
 app.use('/crawl', crawlRouter);
 app.post('/search', searchRouter.search);
-
 }
 catch(err)
 {
