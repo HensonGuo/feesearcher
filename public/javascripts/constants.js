@@ -9,7 +9,7 @@ var SrcConst = {
 	Tbds:"Tbds",
 	Ignores:"Ignores",
 	Vieweds:"Vieweds",
-	Results:"Results"
+	Results:"Results",
 }
 
 

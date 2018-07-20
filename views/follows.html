@@ -1,46 +1,5 @@
 <% include header.html %>
 <% include nav.html %>
-<script>
-	window.onload = function () {
-		$("#videoModal").on('show.bs.modal', function(e){
-			var fileRoot = '<%=filesvradress%>'
-			var starname = '<%=star.name%>';
-			var artname = $(e.relatedTarget).attr('name')
-			var videopath = fileRoot + '/video/' + starname + '/' + artname + '.mp4'
-			videopath = 'http://www.w3school.com.cn/example/html5/mov_bbb.mp4'
-
-			var children = $('#videoPlayerContainer').children();
-			var count = children.length;
-			if (!count)
-			{
-				$('#videoPlayerContainer').append('<video id="videoPlayer" ></video>');
-			}
-			else{
-				for (var child in children)
-					children.remove();
-				$('#videoPlayerContainer').append('<video id="videoPlayer" ></video>');
-			}
-			
-			var video = $('#videoPlayer').videoCt({
-	            title: artname,              //标题
-	            volume: 0.2,                //音量
-	            barrage: true,              //弹幕开关
-	            comment: false,              //弹幕
-	            reversal: true,             //镜像翻转
-	            playSpeed: true,            //播放速度
-	            update: true,               //下载
-	            autoplay: true,            //自动播放
-	            commentSwitch:true,
-	            clarity: {
-	                type: ['高清'],            //清晰度
-	                src: [videopath]      //链接地址
-	            },
-	        });
-
-	        
-		})
-	}
-</script>
 <div class="modal fade" id="videoModal" tabindex="-1" role="div" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" id = "videoPlayerContainer">

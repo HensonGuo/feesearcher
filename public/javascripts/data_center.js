@@ -1,5 +1,6 @@
 var fs=require('fs');
 var constants = require("./constants");
+var utils = require('./utils')
 
 
 var _favorites = {};
@@ -169,8 +170,32 @@ function find(name){
 }
 
 
+function moveFavoriteToViewed(name){
+	try{
+		success = false
+		if (utils.IsInArray(_vieweds, name) == false)
+		{
+			_vieweds.push(name)
+			fs.writeFileSync('./public/configs/vieweds.json', JSON.stringify(_vieweds))
+			success = true
+		}
+		if (utils.isInMap(_favorites, name) == true){
+			delete _favorites[name];
+			fs.writeFileSync('./public/configs/favorite.json', JSON.stringify(_favorites))
+			success = true
+		}
+		return success
+	}
+	catch(err)
+	{
+		console.info(err)
+	}
+}
+        
+
 exports.loadData = loadData;
 exports.getFavorites = getFavorites;
 exports.getFavoriteStar = getFavoriteStar;
 exports.getFavoritesByTagAndMinor = getFavoritesByTagAndMinor;
 exports.find = find;
+exports.moveFavoriteToViewed = moveFavoriteToViewed;

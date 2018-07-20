@@ -33,6 +33,7 @@ app.use('/test', indexRouter.test);
 app.use('/follows', followsRouter.handle);
 app.use('/crawl', crawlRouter);
 app.post('/search', searchRouter.search);
+app.post('/delstar', indexRouter.delstar)
 }
 catch(err)
 {

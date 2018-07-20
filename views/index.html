@@ -7,7 +7,7 @@
 			<% var img = star.cover %>
 			<% var name = star.name %>
 			<% var img = (index == 0) ? (serveradress + "/images/test.gif"):(serveradress + "/images/test.png") %>
-			<% var name = "拉萨拉萨" %>
+			<% //var name = "拉萨拉萨" %>
 			<% var className = star.sign ? "starNameSign" : "starName" %>
 			<%if ((index)%6 == 0){%>
 				<div class="row">
@@ -15,6 +15,7 @@
 
 			<div class="col-sm-2">
 				<div class="star-cover">
+					<div class="glyphicon glyphicon-remove del-button"></div>
 					<a href="<%=serveradress%>/follows/<%=star.name%>">
 						<img src="<%=img%>" alt="star.cover"/>
 					</a>
