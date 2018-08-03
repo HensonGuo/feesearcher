@@ -6,59 +6,104 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="inputDialog" tabindex="-1" role="div" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        	<h4 class="modal-title" id="exampleModalLabel">add art</h4>
+	      	</div>
+	      	<form method="post" action="/addArt">
+		      	<div class="modal-body">
+		          	<div class="form-group">
+		            	<label for="recipient-name" class="control-label">art name:</label>
+		            	<input type="text" class="form-control" id="inputArtName" name="name">
+		            	<label for="recipient-name" class="control-label">cover url:</label>
+		            	<input type="text" class="form-control" id="inputArtCover" name="cover">
+		          	</div>
+			    </div>
+			    <div class="modal-footer">
+		        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        	<button type="button" class="btn btn-primary" id="addArtSubmit" data-dismiss="modal">OK</button>
+		      	</div>
+	      	</form>
+		</div>
+	</div>
+</div>
+
 <section class="content-wrap">
 	<div class="container custom-container">
-		<div class="row">
+		<div class="row art-row">
 			<% var img = star.cover %>
 			<% var name = star.name %>
 			<% var img = "./../images/test.png" %>
 
 			<div class="col-sm-3"></div>
 			<div class="col-sm-3">
-				<div class="star-cover">
+				<div class="star-cover" id="followStarCover">
 					<img src="<%=img%>" alt="star.cover"/>
 				</div>
 			</div>
 			<div class="col-sm-3">
-				<div>name: <%=name%></div>
-				<div>enname: <%=star.enname%></div>
-				<div>birth: <%=star.birth%></div>
-				<div>height: <%=star.height%></div>
-				<div>measurements: <%=star.measurements%></div>
-				<div>cupsize: <%=star.cupsize%></div>
-				<div>tag: <%=star.tags[0]%></div>
-				<div>minorid: <%=star.minorid%></div>
+				<div id="starName">name: <span><%=name%></span></div>
+				<div id="enname">enname: <span><%=star.enname%></span></div>
+				<div id="birth">birth: <span><%=star.birth%></span></div>
+				<div id="height">height: <span><%=star.height%></span></div>
+				<div id="measurements">measurements: <span><%=star.measurements%></span></div>
+				<div id="cupsize">cupsize: <span><%=star.cupsize%></span></div>
+				<div id="tag">tag: <span><%=(star.tags) ? star.tags[0] : undefined %></span></div>
+				<div id="minorid">minorid: <span><%=star.minorid%></span></div>
+				<div class="glyphicon glyphicon-edit" id="edit" onclick="onEdit();"></div>
 			</div>
 			<div class="col-sm-3"></div>
 		</div>
 	</div>
 	<div class="container-fluid custom-fulid">
-		<div class="row">
-			<% var arts = star.arts %>
+		<div class="row art-row">
+			<% var narts = star.arts %>
+			<% var arts = Object.assign([], narts) %>
+			<% arts.push("addTag") %>
 			<% if(arts){ %>
 				<% var artscount = arts.length %>
+				<% console.info(artscount) %>
 				<% arts.forEach(function(art, index, arts){%>
-					<% var img = art.img %>
-					<% var name = art.name %>
-					<% var img = "./../images/test.png" %>
-					<% var name = "拉萨拉萨" %>
+					
 					<%if ((index)%4 == 0){%>
-						<div class="row">
+						<div class="row art-row">
 					<%}%>
-					<div class="col-sm-3">
-						<div class="art-cover">
-							<a class="art-link" name="<%=name%>" data-toggle="modal" data-target="#videoModal">
+
+					<%if (art == "addTag"){%>
+						<% var img = serveradress + "/images/test.png" %>
+						<div class="col-sm-3">
+							<div class="add-art">
+								<div class="glyphicon glyphicon-plus" id="add-icon" data-toggle="modal" data-target="#inputDialog"></div>
 								<img src="<%=img%>" alt="art.cover"/>
-							</a>
-							<div class="art-name"><%=name%></div>
+							</div>
 						</div>
-					</div>
+					<%}else{%>
+						<% var img = art.img %>
+						<% var name = art.name %>
+						<% var img = "./../images/test.png" %>
+						<% var name = "文本文本文本" %>
+
+						<div class="col-sm-3">
+							<div class="art-cover">
+								<div class="glyphicon glyphicon-remove del-button"></div>
+								<a class="art-link" name="<%=name%>" data-toggle="modal" data-target="#videoModal">
+									<img src="<%=img%>" alt="art.cover"/>
+								</a>
+								<div class="art-name"><%=name%></div>
+							</div>
+						</div>
+					<%}%>
+
 					<%if ((index)%4 == 3 || index == artscount - 1){%>
 						</div>
 					<%}%>
 			<% })}%>
 		</div>
-		<div class="xCount">--total:<%=artscount%>--</div>
 	</div>
 </section>
+<div class="xCount">--total:<%=artscount%>--</div>
 <% include footer.html %>

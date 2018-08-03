@@ -45,6 +45,21 @@ function getMinors()
     return _config.minors
 };
 
+
+function addToFavorite(name){
+	if (utils.isInMap(_favorites, name))
+		return false;
+	if (utils.IsInArray(_tbds, name))
+		return false;
+	if (utils.IsInArray(_ignores, name))
+		return false;
+	if (utils.IsInArray(_vieweds, name))
+		return false;
+	_favorites[name] = {"name":name}
+	fs.writeFileSync('./public/configs/favorite.json', JSON.stringify(_favorites))
+	return true;
+}
+
 function getFavoriteStar(starName){
 	if (starName in _favorites)
 		return _favorites[starName]
@@ -66,7 +81,7 @@ function getFavoritesByTagAndMinor(tag, minorid)
 		star = _favorites[starName]
 		if (validTag)
 		{
-			hasTag = star.tags.indexOf(tag) != -1;
+			hasTag = star.tags?star.tags.indexOf(tag) != -1:false;
 			if (hasTag)
 			{
 				if (validMinorid)
@@ -191,11 +206,66 @@ function moveFavoriteToViewed(name){
 		console.info(err)
 	}
 }
+
+function delArt(starName, artName){
+	var star = getFavoriteStar(starName);
+	if (!star)
+		return false
+	arts = star.arts;
+	if (!arts)
+		return false;
+	var artCount = arts.length;
+	for (var index=0; index<artCount; index++){
+		art = arts[index];
+		if (art.name == artName)
+		{
+			arts.splice(index, 1)
+			fs.writeFileSync('./public/configs/favorite.json', JSON.stringify(_favorites))
+			return true
+		}
+	}
+	return false;
+}
+
+function addArt(starName, artName, artCover){
+	var star = getFavoriteStar(starName);
+	console.info(star)
+	if (!star)
+		return false
+	if (!star.arts)
+		star.arts = []
+	arts = star.arts;
+	arts.push({name:artName, img:artCover})
+	fs.writeFileSync('./public/configs/favorite.json', JSON.stringify(_favorites))
+	return true;
+}
+
+function editStar(name, data){
+	var star = getFavoriteStar(name)
+	if (!star)
+		return false
+	star.name = data.name;
+	star.enname = data.enname;
+	star.birth = data.birth;
+	star.height = data.height;
+	star.measurements = data.measurements;
+	star.cupsize = data.cupsize;
+	if (!star.tags)
+		star.tags = []
+	star.tags[0] = data.tag;
+	star.minorid = data.minorid;
+	fs.writeFileSync('./public/configs/favorite.json', JSON.stringify(_favorites))
+	return true;
+}
         
 
 exports.loadData = loadData;
+exports.find = find;
+exports.addToFavorite = addToFavorite;
 exports.getFavorites = getFavorites;
 exports.getFavoriteStar = getFavoriteStar;
 exports.getFavoritesByTagAndMinor = getFavoritesByTagAndMinor;
-exports.find = find;
 exports.moveFavoriteToViewed = moveFavoriteToViewed;
+exports.delArt = delArt;
+exports.addArt = addArt;
+exports.editStar = editStar;

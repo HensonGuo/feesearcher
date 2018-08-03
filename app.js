@@ -9,7 +9,7 @@ try{
   var usersRouter = require('./routes/users');
   var followsRouter = require('./routes/follows');
   var crawlRouter = require('./routes/crawl');
-  var searchRouter = require('./routes/search');
+  var postRouter = require('./routes/post_handler');
 
 
 
@@ -32,8 +32,12 @@ app.use('/users', usersRouter);
 app.use('/test', indexRouter.test);
 app.use('/follows', followsRouter.handle);
 app.use('/crawl', crawlRouter);
-app.post('/search', searchRouter.search);
-app.post('/delstar', indexRouter.delstar)
+app.post('/search', postRouter.search);
+app.post('/addStar', postRouter.addStar)
+app.post('/delstar', postRouter.delstar)
+app.post('/delArt', postRouter.delArt)
+app.post('/addArt', postRouter.addArt)
+app.post('/editStar', postRouter.editStar)
 }
 catch(err)
 {

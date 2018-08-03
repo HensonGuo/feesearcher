@@ -23,16 +23,4 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.delstar = function(req, res) {
-  var query = req.query;
-  var name = query.name;
-  var callback = query.callback;
-  result = dataCenter.moveFavoriteToViewed(name);
-  // res.send(`${callback}("Hello ${req.query.name}")`);
-  var resData = {"result":result, "name":name}
-  resData = JSON.stringify(resData);
-  res.send(`${callback}(${resData})`);
-}
-
-
 module.exports = router;

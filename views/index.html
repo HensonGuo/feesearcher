@@ -1,32 +1,68 @@
 <% include header.html %>
 <% include nav.html %>
+<div class="modal fade" id="inputDialog" tabindex="-1" role="div" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        	<h4 class="modal-title" id="exampleModalLabel">add star</h4>
+	      	</div>
+	      	<form method="post" action="/addStar">
+		      	<div class="modal-body">
+		          	<div class="form-group">
+		            	<label for="recipient-name" class="control-label">star name:</label>
+		            	<input type="text" class="form-control" id="addStarName" name="value">
+		          	</div>
+			    </div>
+			    <div class="modal-footer">
+		        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        	<button type="button" class="btn btn-primary" id="addStarSubmit" data-dismiss="modal">OK</button>
+		      	</div>
+	      	</form>
+		</div>
+	</div>
+</div>
+
 <section class="content-wrap">
 	<div class="container-fluid custom-fulid">
+		<% content.push("addTag") %>
 		<% var count = content.length %>
 		<% content.forEach(function(star, index, stars){%>
-			<% var img = star.cover %>
-			<% var name = star.name %>
-			<% var img = (index == 0) ? (serveradress + "/images/test.gif"):(serveradress + "/images/test.png") %>
-			<% //var name = "拉萨拉萨" %>
-			<% var className = star.sign ? "starNameSign" : "starName" %>
 			<%if ((index)%6 == 0){%>
-				<div class="row">
+				<div class="row star-row">
 			<%}%>
 
-			<div class="col-sm-2">
-				<div class="star-cover">
-					<div class="glyphicon glyphicon-remove del-button"></div>
-					<a href="<%=serveradress%>/follows/<%=star.name%>">
+			<%if (star == "addTag"){%>
+				<% var img = serveradress + "/images/test.png" %>
+				<div class="col-sm-2">
+					<div class="add-star">
+						<div class="glyphicon glyphicon-plus" id="add-icon" data-toggle="modal" data-target="#inputDialog"></div>
 						<img src="<%=img%>" alt="star.cover"/>
-					</a>
-					<div class="<%=className%>"><%=name%></div>
+					</div>
 				</div>
-			</div>
+			<%}else{%>
+				<% var img = star.cover %>
+				<% var name = star.name %>
+				<% var img = serveradress + "/images/test.png" %>
+				<% var name = "拉萨拉萨" %>
+				<% var className = star.sign ? "starNameSign" : "starName" %>
+
+				<div class="col-sm-2">
+					<div class="star-cover">
+						<div class="glyphicon glyphicon-remove del-button"></div>
+						<a href="<%=serveradress%>/follows/<%=star.name%>">
+							<img src="<%=img%>" alt="star.cover"/>
+						</a>
+						<div class="<%=className%>"><%=name%></div>
+					</div>
+				</div>
+			<%}%>
+			
 			<%if ((index)%6 == 5 || index == count - 1){%>
 				</div>
 			<%}%>
 		<% }) %>
 	</div>
-	<div class="xCount">--total:<%=count%>--</div>
+	<div class="xCount">--total:<%=count-1%>--</div>
 </section>
 <% include footer.html %>
